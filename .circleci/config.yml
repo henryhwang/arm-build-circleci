@@ -37,5 +37,5 @@ jobs:
             cp ./build/nvim-linux64.tar.gz ./githubrelease/nvim-arm64.tar.gz
             cp ./build/nvim-linux64.deb ./githubrelease/nvim-arm64.deb
             go install github.com/tcnksm/ghr@latest
-            Version=0.8.0
+            VERSION=0.8.0
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -delete ${VERSION} ./githubrelease/
