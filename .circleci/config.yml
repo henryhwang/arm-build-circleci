@@ -17,7 +17,15 @@ jobs:
           command: sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
       - run:
           name: build
-          command: make
+          command: |
+            ls -l ./build
+            make CMAKE_BUILD_TYPE=Release
+            ls -l ./build
+            make DESTDIR="./build/release/nvim-arm64" install
+            ls -l ./build
+            cd ./build
+            cpack -C Release
+            ls -l
       - run:
           name: test
           command: make unittest
