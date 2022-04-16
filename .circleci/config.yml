@@ -24,9 +24,9 @@ jobs:
             cd ./build
             cpack -C Release
       - store_artifacts:
-          path: ./nvim-linux64.tar.gz
+          path: ~/project/build/nvim-linux64.tar.gz
           destination: nvim-arm64.tar.gz
       - store_artifacts:
-          path: ./nvim-linux64.deb
+          path: ~/project/build/nvim-linux64.deb
           destination: nvim-arm64.deb
             
