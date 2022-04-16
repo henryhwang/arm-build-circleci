@@ -23,19 +23,10 @@ jobs:
             make DESTDIR="./build/release/nvim-arm64" install
             cd ./build
             cpack -C Release
-            cd ..
-      - run:
-          name: test
-          command: make unittest
-      - run:
-          name: check
-          command: |
-            ls -l ~/project/build
-            ls -l ./build
       - store_artifacts:
-          path: ./build/nvim-linux64.tar.gz
+          path: ./nvim-linux64.tar.gz
           destination: nvim-arm64.tar.gz
       - store_artifacts:
-          path: ./build/nvim-linux64.deb
+          path: ./nvim-linux64.deb
           destination: nvim-arm64.deb
             
