@@ -1,14 +1,23 @@
 version: 2.1
-orbs:
-  node: circleci/node@4.7.0
+
 jobs:
   build:
-    executor:
-      name: node/default
-      tag: '10.4'
+    machine:
+      image: ubuntu-1604:201903-01
+    working_directory: ~/project
     steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-      - run: npm run test
+      - run:
+          name: Get Source Code
+          command: git clone https://github.com/neovim/neovim ~/project
+      - run:
+          name: APT update
+          command: sudo apt-get update
+      - run:
+          name: Install dependencies
+          command: sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+      - run:
+          name: build
+          command: make
+      - run:
+          name: test
+          command: make unittest
