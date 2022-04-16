@@ -18,7 +18,6 @@ jobs:
       - run:
           name: build
           command: |
-            ls -l ./build
             make CMAKE_BUILD_TYPE=Release
             ls -l ./build
             make DESTDIR="./build/release/nvim-arm64" install
