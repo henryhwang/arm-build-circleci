@@ -29,4 +29,13 @@ jobs:
       - store_artifacts:
           path: ~/project/build/nvim-linux64.deb
           destination: nvim-arm64.deb
-            
+      - run:
+          name: make a release on github
+          command: |
+            cd ~/project
+            mkdir githubrelease
+            cp ./build/nvim-linux64.tar.gz ./githubrelease/nvim-arm64.tar.gz
+            cp ./build/nvim-linux64.deb ./githubrelease/nvim-arm64.deb
+            go get -u github.com/tcnksm/ghr
+            Version=0.8.0
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -delete ${VERSION} ./githubrelease/
