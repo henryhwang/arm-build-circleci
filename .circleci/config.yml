@@ -21,3 +21,9 @@ jobs:
       - run:
           name: test
           command: make unittest
+      - run:
+          name: check
+          command: |
+            ls -l ~/project/build
+            ls -l ./build
+            
