@@ -2,6 +2,7 @@ version: 2.1
 
 jobs:
   build:
+    context: github
     machine:
       image: ubuntu-2004:current
     resource_class: arm.medium
