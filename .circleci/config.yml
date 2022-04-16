@@ -4,7 +4,7 @@ jobs:
   build:
     machine:
       image: ubuntu-2004:current
-    resource_class: arm_medium
+    resource_class: arm.medium
     working_directory: ~/project
     steps:
       - run:
