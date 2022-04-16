@@ -18,13 +18,11 @@ jobs:
       - run:
           name: build
           command: |
-            make CMAKE_BUILD_TYPE=Release
-            ls -l ./build
+            make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH="
             make DESTDIR="./build/release/nvim-arm64" install
-            ls -l ./build
             cd ./build
             cpack -C Release
-            ls -l
+            cd ..
       - run:
           name: test
           command: make unittest
@@ -33,4 +31,10 @@ jobs:
           command: |
             ls -l ~/project/build
             ls -l ./build
+      - store_artifacts:
+          path: ./build/nvim-linux64.tar.gz
+          destination: nvim-arm64.tar.gz
+      - store_artifacts:
+          path: ./build/nvim-linux64.deb
+          destination: nvim-arm64.deb
             
