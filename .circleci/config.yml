@@ -28,20 +28,21 @@ jobs:
             make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH="
             make DESTDIR="./build/release/nvim-arm64" install
             cd ./build
-            cpack -C Release
+            cpack -C Release -D CPACK_PACKAGE_FILE_NAME="nvim-arm64"
+            ls -l
       - store_artifacts:
-          path: ~/project/build/nvim-linux64.tar.gz
+          path: ~/project/build/nvim-arm64.tar.gz
           destination: nvim-arm64.tar.gz
       - store_artifacts:
-          path: ~/project/build/nvim-linux64.deb
+          path: ~/project/build/nvim-arm64.deb
           destination: nvim-arm64.deb
       - run:
           name: make a release on github
           command: |
             cd ~/project
-            mkdir githubrelease
-            cp ./build/nvim-linux64.tar.gz ./githubrelease/nvim-arm64.tar.gz
-            cp ./build/nvim-linux64.deb ./githubrelease/nvim-arm64.deb
+          mkdir githubrelease
+            cp ./build/nvim-arm64.tar.gz ./githubrelease/nvim-arm64.tar.gz
+            cp ./build/nvim-arm64.deb ./githubrelease/nvim-arm64.deb
             go install github.com/tcnksm/ghr@latest
             VERSION=0.8.0
             ls -l ./githubrelease/
