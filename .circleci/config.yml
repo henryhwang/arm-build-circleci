@@ -40,7 +40,7 @@ jobs:
           name: make a release on github
           command: |
             cd ~/project
-          mkdir githubrelease
+            mkdir githubrelease
             cp ./build/nvim-arm64.tar.gz ./githubrelease/nvim-arm64.tar.gz
             cp ./build/nvim-arm64.deb ./githubrelease/nvim-arm64.deb
             go install github.com/tcnksm/ghr@latest
