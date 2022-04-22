@@ -21,6 +21,7 @@ jobs:
             sudo tar xzf archlinux.tar.gz -C rootfs
             sudo tar cf archlinux.tar -C rootfs .
             docker import archlinux.tar henryhwang/archlinuxarm64:latest
+            docker images ls
       - store_artifacts:
           path: ~/project/archlinux.tar
           destination: archlinux-arm64.tar
