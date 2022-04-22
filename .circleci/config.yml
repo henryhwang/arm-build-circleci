@@ -3,10 +3,29 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-      - build:
+      - create-init-arm64-archlinux-image:
           context: github
           
 jobs:
+  create-init-arm64-archliunx-image:
+    machine:
+      image: ubuntu-2004:current
+    resource_class: arm.medium
+    working_directory: ~/project
+    steps:
+      - run:
+          name: Get arm archlinux rootfs
+          command: |
+            mkdir rootfs
+            curl https://os.archlinuxarm.org/os/ArchLinuxArm-aarch64-latest.tar.gz -o archlinux.tar.gz
+            tar xvzf archlinux.tar.gz -C rootfs
+            tar cf archlinux.tar -C rootfs .
+            docker import archlinux.tar henryhwang/archlinuxarm64:latest
+      - store_artifacts:
+          path: ~/project/archlinux.tar
+          destination: archlinux-arm64.tar
+
+    
   build:
     machine:
       image: ubuntu-2004:current
