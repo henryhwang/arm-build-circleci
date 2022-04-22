@@ -7,7 +7,7 @@ workflows:
           context: github
           
 jobs:
-  create-init-arm64-archliunx-image:
+  create-init-arm64-archlinux-image:
     machine:
       image: ubuntu-2004:current
     resource_class: arm.medium
