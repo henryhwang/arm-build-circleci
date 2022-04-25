@@ -17,12 +17,12 @@ jobs:
           name: get dependencies
           command: |
             sudo apt install git curl cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-#      - run:
-#          name: install rustup.rs
-#          command: |
-#            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
-#            rustup override set stable
-#            rustup update stable
+      - run:
+          name: install rustup.rs
+          command: |
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
+            rustup override set stable
+            rustup update stable
       - run:
           name: get source code
           command: |
