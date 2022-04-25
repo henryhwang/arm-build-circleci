@@ -39,8 +39,9 @@ jobs:
             pwd
             cd ~/project/alacritty
             cargo build --release --no-default-features --features=x11
+            ls -l ~/project/alacritty/target/release
       - store_artifacts:
-          path: ./target/release/alacritty
+          path: ~/project/alacritty/target/release/alacritty
           destination: alacritty-arm64
 
   create-init-arm64-archlinux-image:
