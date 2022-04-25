@@ -9,7 +9,7 @@ workflows:
 jobs:
   build-alacritty-arm64:
     docker:
-      image: agners/archlinuxarm
+      - image: agners/archlinuxarm
     resource_class: arm.medium
     working_directory:  /project
     steps:
