@@ -23,8 +23,8 @@ jobs:
             curl https://sh.rustup.rs -o rustup-init.sh
             chmod 0755 ./rustup-init.sh
             ./rustup-init.sh --default-toolchain none -y
-            # rustup override set stable
-            # rustup update stable
+            rustup override set stable
+            rustup update stable
       - run:
           name: get source code
           command: |
