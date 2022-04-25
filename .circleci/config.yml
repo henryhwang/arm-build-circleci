@@ -18,10 +18,16 @@ jobs:
           command: |
             mkdir rootfs
             curl -L http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz -o archlinux.tar.gz
+            pwd
+            ls -l
             sudo tar xzf archlinux.tar.gz -C rootfs
+            pwd
+            ls -l
             sudo tar cf archlinux.tar -C rootfs .
-            docker import archlinux.tar henryhwang/archlinuxarm64:latest
-            docker images ls -a
+            pwd
+            ls -l
+            docker import archlinux.tar archlinuxarm64:latest
+            docker images
       - store_artifacts:
           path: ~/project/archlinux.tar
           destination: archlinux-arm64.tar
