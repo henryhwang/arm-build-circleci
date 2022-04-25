@@ -11,23 +11,23 @@ jobs:
     machine:
       image: ubuntu-2004:current
     resource_class: arm.medium
-    working_directory:  /project
+    working_directory:  ~/project
     steps:
       - run:
           name: get dependencies
           command: |
             pacman -S git curl cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python
       - run:
-          name: get source code
-          command: |
-            git clone https://github.com/alacritty/alacritty
-            cd alacritty
-      - run:
           name: install rustup.rs
           command: |
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
             rustup override set stable
             rustup update stable
+      - run:
+          name: get source code
+          command: |
+            git clone https://github.com/alacritty/alacritty
+            cd alacritty
       - run:
           name: build
           command: |
