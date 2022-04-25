@@ -16,7 +16,7 @@ jobs:
       - run:
           name: get dependencies
           command: |
-            sudo apt install git curl cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python
+            sudo apt install git curl cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
       - run:
           name: install rustup.rs
           command: |
