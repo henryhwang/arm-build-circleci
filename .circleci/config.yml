@@ -23,6 +23,10 @@ jobs:
             curl https://sh.rustup.rs -o rustup-init.sh
             chmod 0755 ./rustup-init.sh
             ./rustup-init.sh --default-toolchain none -y
+            cat ~/.cargo/env
+            source ~/.cargo/env
+            which rustup
+            which cargo
             rustup override set stable
             rustup update stable
       - run:
