@@ -3,10 +3,39 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-      - create-init-arm64-archlinux-image:
+      - build-alacritty-arm64:
           context: github
           
 jobs:
+  build-alacritty-arm64:
+    docker:
+      image: agners/archlinuxarm
+    resource_class: arm.medium
+    working_directory:  /project
+    steps:
+      - run:
+          name: get dependencies
+          command: |
+            pacman -S git curl cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python
+      - run:
+          name: get source code
+          command: |
+            git clone https://github.com/alacritty/alacritty
+            cd alacritty
+      - run:
+          name: install rustup.rs
+          command: |
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+            rustup override set stable
+            rustup update stable
+      - run:
+          name: build
+          command: |
+            cargo build --release --no-default-features --features=x11
+      - store_artifacts:
+          path: ./target/release/alacritty
+          destination: alacritty-arm64
+
   create-init-arm64-archlinux-image:
     machine:
       image: ubuntu-2004:current
@@ -18,21 +47,13 @@ jobs:
           command: |
             mkdir rootfs
             curl -L http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz -o archlinux.tar.gz
-            pwd
-            ls -l
             sudo tar xzf archlinux.tar.gz -C rootfs
-            pwd
-            ls -l
             sudo tar cf archlinux.tar -C rootfs .
-            pwd
-            ls -l
             docker import archlinux.tar archlinuxarm64:latest
-            docker images
       - store_artifacts:
           path: ~/project/archlinux.tar
           destination: archlinux-arm64.tar
 
-    
   build:
     machine:
       image: ubuntu-2004:current
