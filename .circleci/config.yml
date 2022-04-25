@@ -33,10 +33,11 @@ jobs:
           name: get source code
           command: |
             git clone https://github.com/alacritty/alacritty
-            cd alacritty
       - run:
           name: build
           command: |
+            pwd
+            cd ~/project/alacritty
             cargo build --release --no-default-features --features=x11
       - store_artifacts:
           path: ./target/release/alacritty
