@@ -20,7 +20,9 @@ jobs:
       - run:
           name: install rustup.rs
           command: |
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
+            curl https://sh.rustup.rs -o rustup.sh
+            chmod 0755 rustup.sh
+            ./rustup.sh --default-toolchain none -y
             rustup override set stable
             rustup update stable
       - run:
