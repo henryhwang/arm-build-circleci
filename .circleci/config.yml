@@ -20,7 +20,7 @@ jobs:
       - run:
           name: install rustup.rs
           command: |
-            curl --proto '=https' --tlsv1.2 -sDf https://sh.rustup.rs | sh
+            curl --proto '=https' --tlsv1.2 -sDf https://sh.rustup.rs | sh -s -- -y
             source ~/.cargo/env
             rustup override set stable
             rustup update stable
